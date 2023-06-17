@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    // (KAP LIB 0-2) "Kapt" Annotation Processor
+    id 'kotlin-kapt'
+}
+
+android {
+    namespace 'com.chivumarius.quizapp'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.chivumarius.quizapp"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    // (DB LIB 0) "DATA BINDING":
+    buildFeatures {
+        dataBinding = true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // (RF LIB 0-1) "RETROFIT"  LIBRARY  (For Converting "JSON" Object → to "Kotlin" Object)
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    // (RF LIB 0-2) "GSON CONVERTOR"
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+
+    // (CO LIB 0) "Kotlinx-Coroutines-Android"
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+
+
+    // (LC LIB 0)  "LIFECYCLE_VERSION":
+    def lifecycle_version = "2.6.1"
+
+    // (VM LIB 0) "VIEW MODEL" LIBRARY:
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    // (LD LIB 0) "LiveData"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+
+    // (KAP LIB 0-1) "Kapt" Annotation Processor
+
+    //noinspection LifecycleAnnotationProcessorWithJava8
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")
+}
